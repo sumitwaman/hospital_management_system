@@ -1,0 +1,33 @@
+<h1> Details of the patient </h1>
+
+<p>
+    <strong>
+        Name: 
+    </strong>
+    <%= @patient.name %>
+</p>
+
+<p>
+    <strong>
+        Address
+    </strong>
+    <%= @patient.address %>
+</p>
+
+<p>
+    <strong>
+        Contact No:  
+    </strong>
+    <%= @patient.contact_number %>
+</p>
+
+<p>
+    <strong>
+        Date of Birth:  
+    </strong>
+    <%= @patient.date_of_birth %>
+</p>
+
+<%= link_to 'Edit', edit_patient_path(@patient) %>
+<%= link_to 'Delete', @patient, data: { "turbo-method": :delete, 'turbo-confirm': 'Are you sure?' } %>
+<%= link_to 'Back',  patients_path %>

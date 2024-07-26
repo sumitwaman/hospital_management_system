@@ -1,0 +1,30 @@
+<% if @doctor.errors.any? %>
+    <h2>Following errors are prevented doctor from being saved</h2>
+    <ul>
+        <% @doctor.errors.full_messages.each do |msg|%>
+            <li><%= msg %></li>
+        <%end%>
+    </ul>
+<% end %>
+
+
+<%= form_with(model: @doctor, local: true) do |form|%>
+    <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+    </div>
+
+    <div class="field">
+        <%= form.label :specialty %>
+        <%= form.text_field :specialty %>
+    </div>
+
+    <div class="field">
+        <%= form.label :contact_number %>
+        <%= form.text_field :contact_number %>
+    </div>
+
+    <div class="actions">
+        <%= form.submit %>
+    </div>
+<% end %>

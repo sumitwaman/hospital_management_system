@@ -1,0 +1,32 @@
+<h1>Patients</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact No.</th>
+            <th>Date of Birth</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @patients.each do |patient| %>
+        <tr>
+            <td><%= patient.name%></td>
+            <td><%= patient.address%></td>
+            <td><%= patient.contact_number%></td>
+            <td><%= patient.date_of_birth%></td>
+            <td>
+                <%= link_to 'Show', patient %>
+                <%= link_to 'Edit', edit_patient_path(patient) %>
+                <%= link_to 'Delete', patient, data: { "turbo-method": :delete, 'turbo-confirm': 'Are you sure?' } %>
+                <%# data: { "turbo-method": :delete, confirm: 'Are you sure?' } %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= link_to 'New Patient', new_patient_path %>

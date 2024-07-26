@@ -1,0 +1,33 @@
+<h1>Appointment</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @appointments.each do |appointment| %>
+            <tr>
+                <td><%= appointment.patient.name %></td>
+                <td><%= appointment.doctor.name %></td>
+                <td><%= appointment.date %></td>
+                <td><%= appointment.time %></td>
+                <td><%= appointment.status %></td>  
+                <td>
+                    <%= link_to 'Show', [appointment.patient || appointment.doctor, appointment] %>
+                    <%= link_to 'Edit', [appointment.patient || appointment.doctor, appointment] %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%# <%= link_to 'New Appointment', new_patient_appointment_path(@patient) %> 
+<%= link_to 'Back to Patients', patients_path %> 
+<%= link_to 'Back to Doctors', doctors_path %> 

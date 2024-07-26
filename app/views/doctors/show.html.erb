@@ -1,0 +1,26 @@
+<h1> Details of the doctor </h1>
+
+<p>
+    <strong>
+        Name: 
+    </strong>
+    <%= @doctor.name %>
+</p>
+
+<p>
+    <strong>
+        Specialty
+    </strong>
+    <%= @doctor.specialty %>
+</p>
+
+<p>
+    <strong>
+        Contact No:  
+    </strong>
+    <%= @doctor.contact_number %>
+</p>
+
+<%= link_to 'Edit', edit_doctor_path(@doctor) %>
+<%= link_to 'Delete', @doctor, data: { "turbo-method": :delete, 'turbo-confirm': 'Are you sure?' } %>
+<%= link_to 'Back',  doctors_path %>
