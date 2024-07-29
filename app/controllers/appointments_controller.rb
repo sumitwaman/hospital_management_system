@@ -1,56 +1,69 @@
-# frozen_string_literal: true
-
-# Appointment_Controller
 class AppointmentsController < ApplicationController
+  before_action :set_patient_or_doctor
   before_action :set_appointment, only: %i[show edit update destroy]
-  before_action :set_patiets_and_doctors, only: %i[new edit]
 
   def index
-    @appointments = Appointment.all
+    @appointments = @patient_or_doctor.appointments
   end
 
   def show; end
 
   def new
-    @appointment = Appointment.new
+    @appointment = @patient_or_doctor.appointments.build
+    @patients = Patient.all
+    @doctors = Doctor.all
+  end
+
+  def edit
+    @patients = Patient.all
+    @doctors = Doctor.all
   end
 
   def create
-    @appointment = Appointment.new(appointment_params)
-    if appointment.save
-      redirect_to @appointment
-    else
-      render :new, status: :unprocessable_entity
+    @appointment = @patient_or_doctor.appointments.build(appointment_params)
+    respond_to do |format|
+      if @appointment.save
+        format.html { redirect_to [@patient_or_doctor, @appointment], notice: 'Appointment was successfully created.' }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
-  def edit; end
-
   def update
-    if @appointment.update(appointment_params)
-      redirect_to @appointment
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @appointment.update(appointment_params)
+        format.html { redirect_to [@patient_or_doctor, @appointment], notice: 'Appointment was successfully updated.' }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     @appointment.destroy
-    redirect_to appointments_path
+    respond_to do |format|
+      format.html { redirect_to @patient_or_doctor, notice: 'Appointment was successfully destroyed.' }
+    end
   end
 
   private
 
+  def set_patient_or_doctor
+    if params[:patient_id]
+      @patient_or_doctor = Patient.find(params[:patient_id])
+    elsif params[:doctor_id]
+      @patient_or_doctor = Doctor.find(params[:doctor_id])
+    else
+      redirect_to root_path, alert: 'No doctor and patient found for appointment'
+    end
+  end
+
   def set_appointment
-    @appointment = Appointment.find(params[:id])
+    @appointment = @patient_or_doctor.appointments.find(params[:id])
   end
 
   def appointment_params
     params.require(:appointment).permit(:patient_id, :doctor_id, :date, :time, :status)
-  end
-
-  def set_patiets_and_doctors
-    @patients = Patient.all
-    @doctors = Doctor.all
   end
 end

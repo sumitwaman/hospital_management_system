@@ -1,0 +1,36 @@
+
+
+<%= form_with(model: [@patient_or_doctor, appointment], local: true) do |form| %>
+
+    <% if appointment.errors.any? %>
+      <ul>
+        <% appointment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+  <div class="field">
+    <%= form.label :patient_id %>
+    <%= form.collection_select :patient_id, Patient.all, :id, :name, include_blank: 'Select Patient' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :doctor_id %>
+    <%= form.collection_select :doctor_id, Doctor.all, :id, :name, include_blank: 'Select Doctor' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_field :date, min: Date.today, required: true %>
+  </div>
+
+   <div class="field">
+    <%= form.label :time %>
+    <%= form.time_field :time, value: @appointment.time&.strftime("%H:%M") || "", required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
