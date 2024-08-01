@@ -1,13 +1,13 @@
-<h1>Appointment Details</h1>
+<h1>Appointment</h1>
 
 <p>
-  <strong>Patient:</strong>
-  <%= @appointment.patient.name if @appointment.patient %>
+  <strong>Doctor:</strong>
+  <%= @appointment.patient&.name || 'Not assigned' %>
 </p>
 
 <p>
   <strong>Doctor:</strong>
-  <%= @appointment.doctor.name if @appointment.doctor %>
+  <%= @appointment.doctor&.name || 'Not assigned' %>
 </p>
 
 <p>
@@ -17,8 +17,9 @@
 
 <p>
   <strong>Time:</strong>
-  <%= @appointment.time %>
+  <%= @appointment.time.try(:strftime, "%H:%M") %>
 </p>
 
-<%= link_to 'Edit', edit_patient_appointment_path(@appointment.patient, @appointment) %>
-<%= link_to 'Back', patient_appointments_path(@appointment.patient) %> 
+
+<%= link_to 'Edit', edit_patient_appointment_path(@patient, @appointment) %> |
+<%= link_to 'Back', patient_appointments_path(@patient) %>

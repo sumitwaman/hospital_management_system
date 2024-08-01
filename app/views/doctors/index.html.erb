@@ -1,4 +1,4 @@
-<h1>Patients</h1>
+<h1>Doctors</h1>
 
 <table>
     <thead>
@@ -19,7 +19,7 @@
             <td>
                 <%= link_to 'Show', doctor %>
                 <%= link_to 'Edit', edit_doctor_path(doctor) %>
-                <%= link_to 'Delete', doctor, data: { "turbo-method": :delete, "turbo-confirm": 'Are you sure?' } %>
+                <%# <%= link_to 'Delete', doctor, data: { "turbo-method": :delete, "turbo-confirm": 'Are you sure?' } %> 
                 <%# data: { "turbo-method": :delete, confirm: 'Are you sure?' } %>
             </td>
         </tr>

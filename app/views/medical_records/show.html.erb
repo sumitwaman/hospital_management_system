@@ -1,0 +1,29 @@
+<h1>Medicla Record Details</h1>
+
+<p>
+  <strong>Patient:</strong>
+  <%= @medical_record.patient.name if @medical_record.patient %>
+</p>
+
+<p>
+  <strong>Doctor:</strong>
+  <%= @medical_record.doctor.name if @medical_record.doctor %>
+</p>
+
+<p>
+  <strong>Diagnosis:</strong>
+  <%= @medical_record.diagnosis %>
+</p>
+
+<p>
+  <strong>Prescription:</strong>
+  <%= @medical_record.prescription %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @medical_record.date %>
+</p>
+
+<%= link_to 'Edit', edit_doctor_medical_record_path(@medical_record.doctor, @medical_record) %>
+<%= link_to 'Back', doctor_medical_records_path(@medical_record.doctor) %> 

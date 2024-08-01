@@ -10,7 +10,14 @@
     <%= javascript_importmap_tags %>
   </head>
 
-
+  <header>
+    <nav>
+      <ul>
+        <li><%= link_to 'All Patients', patients_path %></li>
+        <li><%= link_to 'All Doctors', doctors_path %></li>
+      </ul>
+    </nav>
+  </header>
 
   <body>
     <%= render 'layouts/messages' %>

@@ -29,5 +29,6 @@
 </p>
 
 <%= link_to 'Edit', edit_patient_path(@patient) %>
-<%= link_to 'Delete', @patient, data: { "turbo-method": :delete, 'turbo-confirm': 'Are you sure?' } %>
+<%# <%= link_to 'Delete', @patient, data: { "turbo-method": :delete, 'turbo-confirm': 'Are you sure?' } %>  
 <%= link_to 'Back',  patients_path %>
+<%= link_to 'See appointments',  patient_appointments_path(@patient) %>

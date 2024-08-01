@@ -1,0 +1,31 @@
+<h1>Medical Records</h1>
+
+<%= link_to 'New Medical Record', new_doctor_medical_record_path(@doctor) %>
+
+<table>
+    <thead>
+        <tr>
+            <th>Patient</th>
+            <th>Diagnosis</th>
+            <th>Prescription</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @medical_records.each do |rec| %>
+            <tr>
+                <td><%= rec.patient.name if rec.patient %> </td>
+                <td><%= rec.diagnosis %> </td>
+                <td><%= rec.prescription %> </td>
+                <td><%= rec.date %></td>
+                <td>
+                    <%= link_to 'Show', [rec.doctor || rec.patient, rec] %>
+                    <%= link_to 'Edit', edit_doctor_medical_record_path(rec.doctor, rec)%>
+                    <%# <%= link_to 'Destroy', [rec.doctor || rec.patient, rec], data: { "turbo-method": :delete, "turbo-confirm": 'Are you sure?' } %> 
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

@@ -1,23 +1,18 @@
-
-
-<%= form_with(model: [@patient_or_doctor, appointment], local: true) do |form| %>
-
-    <% if appointment.errors.any? %>
+<%= form_with(model: [@patient, appointment], local: true) do |form| %>
+  <% if appointment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
       <ul>
         <% appointment.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
-    <% end %>
-
-  <div class="field">
-    <%= form.label :patient_id %>
-    <%= form.collection_select :patient_id, Patient.all, :id, :name, include_blank: 'Select Patient' %>
-  </div>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= form.label :doctor_id %>
-    <%= form.collection_select :doctor_id, Doctor.all, :id, :name, include_blank: 'Select Doctor' %>
+    <%= form.collection_select :doctor_id, Doctor.all, :id, :name, include_blank: 'Select Doctor', selected: @appointment.doctor_id %>
   </div>
 
   <div class="field">
@@ -25,9 +20,9 @@
     <%= form.date_field :date, min: Date.today, required: true %>
   </div>
 
-   <div class="field">
+  <div class="field">
     <%= form.label :time %>
-    <%= form.time_field :time, value: @appointment.time&.strftime("%H:%M") || "", required: true %>
+    <%= form.time_field :time, value: @appointment.time.try(:strftime, "%H:%M"), required: true %>
   </div>
 
   <div class="actions">
